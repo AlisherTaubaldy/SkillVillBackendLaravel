@@ -30,11 +30,7 @@ class LoginController extends Controller
 
     public function test(Request $request){
 
-        $user = [
-            'success' => 'good',
-            'message' => 'goood',
-            'role' => 'krasavshick'
-        ];
-        return $user;
+        $token = $request->session()->token();
+        return response()->json(['csrf_token' => $token]);
     }
 }
