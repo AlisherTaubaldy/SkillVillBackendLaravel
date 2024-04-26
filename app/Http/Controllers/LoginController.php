@@ -13,12 +13,18 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Аутентификация прошла успешно
-            return redirect()->intended('/');
+            return response()->json(['success' => true,
+                'message' => 'Login unsuccessful',
+                'user_id' => Auth::user(),
+                'role' => 'USER'
+            ]);
         }
 
         // В случае ошибки аутентификации
-        return redirect()->back()->withErrors([
-            'email' => 'Неверный email или пароль.',
+        return response()->json(['success' => false,
+            'message' => 'Login successful',
+            'user_id' => 0,
+            'role' => 'USER'
         ]);
     }
 
